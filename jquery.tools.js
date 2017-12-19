@@ -13,55 +13,52 @@ else
     };
 Common.Tools = {
     Cookies: {
-    	/*
-	     * 写入cookies
-	     * @param _key 键
-	     * @param _val 值
-	     * @param _day 存放多少天
-	     */
-	    set:function(_key,_val,_day)
-	    {
-	        //获取当前日期
-	        var expiresDate = new Date();
-	        //设置生存期，一天后过期
-	        expiresDate.setDate(expiresDate.getDate() + (_day?_day:1));
-	        document.cookie = _key+"="+_val+";expires= " + expiresDate.toGMTString()+";path=/;";//标记已经访问了站点
-	    },
-	    /**
-	     * 获取cookies
-	     * @param _key 键名称
-	     */
-	    get:function(_key)
-	    {
-	        var search = _key + "=";
-	        var returnvalue = "";
-	        if (document.cookie.length > 0) {
-	            offset = document.cookie.indexOf(search);
-	            if (offset != -1) {
-	                // 已经存在cookies内
-	                offset += search.length;
-	                // set index of beginning of value
-	                end = document.cookie.indexOf(";", offset);
-	                // set index of end of cookie value
-	                if (end == -1)
-	                    end = document.cookie.length;
-	                returnvalue = unescape(document.cookie.substring(offset, end));
-	            }
-	        }
-	        return returnvalue;
-	    },
-	    /**
-	     * 删除cookies
-	     * @param _key
-	     */
-	    del:function(_key)
-	    {
-	        //获取当前日期
-	        var expiresDate = new Date();
-	        //设置生存期，一天后过期
-	        expiresDate.setDate(expiresDate.getDate() - 100);
-	        document.cookie = _key+"=null;expires= " + expiresDate.toGMTString()+";path=/;";//标记已经访问了站点
-	    }
+        /*
+         * 写入cookies
+         * @param _key 键
+         * @param _val 值
+         * @param _day 存放多少天
+         */
+        set: function(_key, _val, _day) {
+            //获取当前日期
+            var expiresDate = new Date();
+            //设置生存期，一天后过期
+            expiresDate.setDate(expiresDate.getDate() + (_day ? _day : 1));
+            document.cookie = _key + "=" + _val + ";expires= " + expiresDate.toGMTString() + ";path=/;"; //标记已经访问了站点
+        },
+        /**
+         * 获取cookies
+         * @param _key 键名称
+         */
+        get: function(_key) {
+            var search = _key + "=";
+            var returnvalue = "";
+            if (document.cookie.length > 0) {
+                offset = document.cookie.indexOf(search);
+                if (offset != -1) {
+                    // 已经存在cookies内
+                    offset += search.length;
+                    // set index of beginning of value
+                    end = document.cookie.indexOf(";", offset);
+                    // set index of end of cookie value
+                    if (end == -1)
+                        end = document.cookie.length;
+                    returnvalue = unescape(document.cookie.substring(offset, end));
+                }
+            }
+            return returnvalue;
+        },
+        /**
+         * 删除cookies
+         * @param _key
+         */
+        del: function(_key) {
+            //获取当前日期
+            var expiresDate = new Date();
+            //设置生存期，一天后过期
+            expiresDate.setDate(expiresDate.getDate() - 100);
+            document.cookie = _key + "=null;expires= " + expiresDate.toGMTString() + ";path=/;"; //标记已经访问了站点
+        }
     },
     String: {
 
@@ -70,10 +67,79 @@ Common.Tools = {
 
     },
     Date: {
-
+        /**
+         * 计算两个日期的相差值 默认返回相差天数 不指定_diffType的情况下
+         * @param _sDate1:string 值大的日期串 yyyy-MM-dd
+         * @param _sDate2:string 值小的日期串 yyyy-MM-dd
+         * @param _diffType:string 相差值类型(y(年)/M(月)/d(天)/h(小时)/m(分)/s(秒)) 默认为d
+         */
+        diff: function(_sDate1, _sDate2, _diffType) {
+            var aDate, oDate1, oDate2, diffVal;
+            aDate = _sDate1.split("-");
+            oDate1 = new Date(aDate[1] + '-' + aDate[2] + '-' + aDate[0]);
+            aDate = _sDate2.split("-");
+            oDate2 = new Date(aDate[1] + '-' + aDate[2] + '-' + aDate[0]);
+            if (!_diffType) _diffType = "d";
+            switch (_diffType) {
+                case "y":
+                    diffVal = parseInt((oDate1 - oDate2) / 1000 / 60 / 60 / 24 / 30 / 12);
+                    break;
+                case "M":
+                    diffVal = parseInt((oDate1 - oDate2) / 1000 / 60 / 60 / 24 / 30);
+                    break;
+                case "d":
+                    diffVal = parseInt((oDate1 - oDate2) / 1000 / 60 / 60 / 24);
+                    break;
+                case "h":
+                    diffVal = parseInt((oDate1 - oDate2) / 1000 / 60 / 60);
+                    break;
+                case "m":
+                    diffVal = parseInt((oDate1 - oDate2) / 1000 / 60);
+                    break;
+                case "s":
+                    diffVal = parseInt((oDate1 - oDate2) / 1000);
+                    break;
+            }
+            return diffVal;
+        }
     },
     Checker: {
+        /**
+         * 手机号码格式是否正确
+         * @param _mobile:string 手机号码 11位
+         * @return true/false 
+         */
+        isMobile: function(_mobile) {
+            var reg = /^13[0-9]{9}$|14[0-9]{9}|15[0-9]{9}$|17[0-9]{9}$|18[0-9]{9}$/;
+            if (_mobile == '' || !reg.test(_mobile)) {
+                return false;
+            }
+            return true;
+        },
+        /**
+         * 邮箱地址格式是否正确
+         * @param _email:string 邮箱地址
+         * @return true/false 
+         */
+        isEmail: function(_email) {
+            var reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            if (_email == '' || !reg.test(_email)) {
+                return false;
+            }
+            return true;
+        },
+        /**
+         * 身份证号码格式是否正确
+         * @param _cardNo:string 身份证号码
+         * @return true/false 
+         */
+        isIdCardNo: function(_cardNo) {
 
+            if (_cardNo == '' || !/^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/i.test(_cardNo)) {
+                return false;
+            }
+            return true;
+        }
     },
     Browser: {
         /**
@@ -117,27 +183,39 @@ Common.Tools = {
             }
         },
         /**
-        * 获取url参数值
-        * @param _pkey:string 参数名称
-        * @return {string}:不存在则返回null
-        */
-        getParam: function (_pkey) {
-	        var c = document.location.search;
-	        if (!_pkey) { return c }
-	        var d = new RegExp("[?&]" + _pkey + "=([^&]+)", "g");
-	        var g = d.exec(c);
-	        var a = null;
-	        if (null != g) {
-	            try {
-	                a = decodeURIComponent(decodeURIComponent(g[1]))
-	            } catch (f) {
-	                try {
-	                    a = decodeURIComponent(g[1])
-	                } catch (f) {
-	                    a = g[1]
-	                }
-	            }
-	        } return a;
-	    }
+         * 获取url参数值
+         * @param _pkey:string 参数名称
+         * @return {string}:不存在则返回null
+         */
+        getParam: function(_pkey) {
+            var c = document.location.search;
+            if (!_pkey) { return c }
+            var d = new RegExp("[?&]" + _pkey + "=([^&]+)", "g");
+            var g = d.exec(c);
+            var a = null;
+            if (null != g) {
+                try {
+                    a = decodeURIComponent(decodeURIComponent(g[1]))
+                } catch (f) {
+                    try {
+                        a = decodeURIComponent(g[1])
+                    } catch (f) {
+                        a = g[1]
+                    }
+                }
+            }
+            return a;
+        },
+        /**
+         * 是否是微信
+         */
+        isWeixin: function() {
+            var ua = window.navigator.userAgent.toLowerCase();
+            if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 };

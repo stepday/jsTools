@@ -5,20 +5,47 @@
 	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script type="text/javascript" src="jquery.tools.js"></script>
 	<style type="text/css">
-		.btn{ height: 35px; line-height: 35px;border-radius: 5px;outline: none;background: #f4511e;color: #fff;text-align: center; font-size: 14px;padding: 0 15px; cursor: pointer; max-width: 200px; display: inline-block; margin-top: 15px;}
+		.btn{ height: 35px; line-height: 35px;border-radius: 5px;outline: none;background: #f4511e;color: #fff;text-align: center; font-size: 14px;padding: 0 15px; cursor: pointer; max-width: 300px; display: inline-block; margin-top: 15px;}
 		.btn:hover{
 			box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19); 
 		}
 		.blue{ background: #008CBA; }
 		.red{ background: #f44336; }
+		.black{ background: #555555; }
+		h5{ line-height: 30px; font-weight: bold;  font-size: 16px; font-family: 微软雅黑;margin: 10px auto;}
+		input{ height: 30px; padding-left: 5px; width: 150px; border-radius: 4px; outline: none; border: 1px solid #333;font-size: 14px;}
 	</style>
 </head>
 <body>
-	<div class="btn" onclick="alert(Common.Tools.Browser.isSuportPlaceholder());">是否支持placeholder</div>
-	<div class="btn blue" onclick="alert(Common.Tools.Browser.getParam('name'));">获取name参数值</div>
+	<h5>Common.Tools.Cookies</h5>
 	<div class="btn red" onclick="Common.Tools.Cookies.set('name','stepday',1);">设置cookies name=stepday</div>
 	<div class="btn" onclick="alert(Common.Tools.Cookies.get('name'));">获取key为name的cookeis值</div>
 	<div class="btn blue" onclick="Common.Tools.Cookies.del('name');">删除key为name的cookies</div>
+	<h5>Common.Tools.Date</h5>
+	<div class="btn" onclick="alert(Common.Tools.Date.diff('2018-12-20','2017-12-19','y'));">获取2018-12-20与2017-12-19的相差年</div>
+	<div class="btn blue" onclick="alert(Common.Tools.Date.diff('2018-12-20','2017-12-19','M'));">获取2018-12-20与2017-12-19的相差月</div>
+	<div class="btn red" onclick="alert(Common.Tools.Date.diff('2018-12-20','2017-12-19','d'));">获取2018-12-20与2017-12-19的相差日</div>
+	<div class="btn black" onclick="alert(Common.Tools.Date.diff('2018-12-20','2017-12-19','h'));">获取2018-12-20与2017-12-19的相差小时</div>
+	<div class="btn blue" onclick="alert(Common.Tools.Date.diff('2018-12-20','2017-12-19','m'));">获取2018-12-20与2017-12-19的相差分钟</div>
+	<div class="btn red" onclick="alert(Common.Tools.Date.diff('2018-12-20','2017-12-19','s'));">获取2018-12-20与2017-12-19的相差秒钟</div>
+	<h5>Common.Tools.Checker</h5>
+	<input type="text" id="txtMobile" placeholder="请输入手机号码">
+	<div class="btn black" onclick="checkMobile()">校验手机号码格式</div>
+	<h5>Common.Tools.Browser</h5>
+	<div class="btn" onclick="alert(Common.Tools.Browser.isSuportPlaceholder());">是否支持placeholder</div>
+	<div class="btn blue" onclick="alert(Common.Tools.Browser.getParam('name'));">获取name参数值</div>	
+	<div class="btn red" onclick="alert(Common.Tools.Browser.isWeixin());">是否为微信浏览器</div>
 
+	<script type="text/javascript">
+		checkMobile = function(){
+			if($("#txtMobile").val().length == 0)
+			{
+				alert("请输入手机号码");
+				return;
+			}else{
+				alert(Common.Tools.Checker.isMobile($("#txtMobile").val()));
+			}
+		}
+	</script>
 </body>
 </html>
