@@ -67,6 +67,29 @@ Common.Tools = {
                     }
                 }).blur();
             }
-        }
+        },
+        /**
+        * 获取url参数值
+        * @param _pkey:string 参数名称
+        * @return {string}:不存在则返回null
+        */
+        getParam: function (_pkey) {
+	        var c = document.location.search;
+	        if (!_pkey) { return c }
+	        var d = new RegExp("[?&]" + _pkey + "=([^&]+)", "g");
+	        var g = d.exec(c);
+	        var a = null;
+	        if (null != g) {
+	            try {
+	                a = decodeURIComponent(decodeURIComponent(g[1]))
+	            } catch (f) {
+	                try {
+	                    a = decodeURIComponent(g[1])
+	                } catch (f) {
+	                    a = g[1]
+	                }
+	            }
+	        } return a;
+	    }
     }
 };

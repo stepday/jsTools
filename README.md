@@ -4,7 +4,7 @@
 #工具库名称
 Common.Tools
 
-#库内分组层层级关系
+#库内分组层级关系
 <pre>
    |-- Common
 	    |-- Tools
@@ -14,8 +14,9 @@ Common.Tools
 	         |-- Number   //数据类型的常用操作
 	         |-- Checker  //判断检查一类的 比如手机号码、身份号码格式是否正确等一类的
 	         |-- Browser  //浏览器差异相关的一些操作处理
-	             |-- isSuportPlaceholder() //是否兼容placeholder
-	             |-- compatiPlaceholder() //批量兼容处理页面上的输入框placeholder的提示效果		
+	             .isSuportPlaceholder() //是否兼容placeholder
+	             .compatiPlaceholder() //批量兼容处理页面上的输入框placeholder的提示效果
+	             .getParam(_pkey) //获取url参数值
 </pre>
 
 #调用示例
