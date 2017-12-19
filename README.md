@@ -9,6 +9,9 @@ Common.Tools
    |-- Common
 	    |-- Tools
 	         |-- Cookies  //cookis的常用操作
+	         	 .set(_key,_val,_day) //设置cookies
+	         	 .get(_key)  //获取cookies
+	         	 .del(_key)  //删除cookies
 	         |-- Date     //日期的常用操作
 	         |-- String   //字符串的常用操作
 	         |-- Number   //数据类型的常用操作

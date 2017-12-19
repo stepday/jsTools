@@ -9,11 +9,59 @@ if (Common)
     Common.Tools = {};
 else
     var Common = {
-        Tools: {};
+        Tools: {}
     };
 Common.Tools = {
     Cookies: {
-
+    	/*
+	     * 写入cookies
+	     * @param _key 键
+	     * @param _val 值
+	     * @param _day 存放多少天
+	     */
+	    set:function(_key,_val,_day)
+	    {
+	        //获取当前日期
+	        var expiresDate = new Date();
+	        //设置生存期，一天后过期
+	        expiresDate.setDate(expiresDate.getDate() + (_day?_day:1));
+	        document.cookie = _key+"="+_val+";expires= " + expiresDate.toGMTString()+";path=/;";//标记已经访问了站点
+	    },
+	    /**
+	     * 获取cookies
+	     * @param _key 键名称
+	     */
+	    get:function(_key)
+	    {
+	        var search = _key + "=";
+	        var returnvalue = "";
+	        if (document.cookie.length > 0) {
+	            offset = document.cookie.indexOf(search);
+	            if (offset != -1) {
+	                // 已经存在cookies内
+	                offset += search.length;
+	                // set index of beginning of value
+	                end = document.cookie.indexOf(";", offset);
+	                // set index of end of cookie value
+	                if (end == -1)
+	                    end = document.cookie.length;
+	                returnvalue = unescape(document.cookie.substring(offset, end));
+	            }
+	        }
+	        return returnvalue;
+	    },
+	    /**
+	     * 删除cookies
+	     * @param _key
+	     */
+	    del:function(_key)
+	    {
+	        //获取当前日期
+	        var expiresDate = new Date();
+	        //设置生存期，一天后过期
+	        expiresDate.setDate(expiresDate.getDate() - 100);
+	        document.cookie = _key+"=null;expires= " + expiresDate.toGMTString()+";path=/;";//标记已经访问了站点
+	    }
     },
     String: {
 

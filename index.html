@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>工具库实操</title>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript" src="jquery.tools.js"></script>
+	<style type="text/css">
+		.btn{ height: 35px; line-height: 35px;border-radius: 5px;outline: none;background: #f4511e;color: #fff;text-align: center; font-size: 14px;padding: 0 15px; cursor: pointer; max-width: 200px; display: inline-block; margin-top: 15px;}
+		.btn:hover{
+			box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19); 
+		}
+		.blue{ background: #008CBA; }
+		.red{ background: #f44336; }
+	</style>
+</head>
+<body>
+	<div class="btn" onclick="alert(Common.Tools.Browser.isSuportPlaceholder());">是否支持placeholder</div>
+	<div class="btn blue" onclick="alert(Common.Tools.Browser.getParam('name'));">获取name参数值</div>
+	<div class="btn red" onclick="Common.Tools.Cookies.set('name','stepday',1);">设置cookies name=stepday</div>
+	<div class="btn" onclick="alert(Common.Tools.Cookies.get('name'));">获取key为name的cookeis值</div>
+	<div class="btn blue" onclick="Common.Tools.Cookies.del('name');">删除key为name的cookies</div>
+
+</body>
+</html>
