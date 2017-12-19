@@ -61,10 +61,10 @@ Common.Tools = {
         }
     },
     String: {
-
+    	
     },
     Number: {
-
+    	
     },
     Date: {
         /**

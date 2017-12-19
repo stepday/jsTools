@@ -31,6 +31,10 @@
 	<h5>Common.Tools.Checker</h5>
 	<input type="text" id="txtMobile" placeholder="请输入手机号码">
 	<div class="btn black" onclick="checkMobile()">校验手机号码格式</div>
+	<input type="text" id="txtEmail" placeholder="请输入邮箱账号">
+	<div class="btn red" onclick="checkEmail()">校验邮箱格式</div>
+	<input type="text" id="txtCardno" placeholder="请输入身份证号码">
+	<div class="btn blue" onclick="checkIdCard()">校验身份证号码格式</div>
 	<h5>Common.Tools.Browser</h5>
 	<div class="btn" onclick="alert(Common.Tools.Browser.isSuportPlaceholder());">是否支持placeholder</div>
 	<div class="btn blue" onclick="alert(Common.Tools.Browser.getParam('name'));">获取name参数值</div>	
@@ -44,6 +48,24 @@
 				return;
 			}else{
 				alert(Common.Tools.Checker.isMobile($("#txtMobile").val()));
+			}
+		}
+		checkEmail = function(){
+			if($("#txtEmail").val().length == 0)
+			{
+				alert("请输入邮箱账号");
+				return;
+			}else{
+				alert(Common.Tools.Checker.isEmail($("#txtEmail").val()));
+			}
+		}
+		checkIdCard = function(){
+			if($("#txtCardno").val().length == 0)
+			{
+				alert("请输入身份证号码");
+				return;
+			}else{
+				alert(Common.Tools.Checker.isIdCardNo($("#txtCardno").val()));
 			}
 		}
 	</script>
