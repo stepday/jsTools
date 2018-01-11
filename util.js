@@ -1,5 +1,5 @@
 /**
- * 基于jQuery的工具库
+ * web前端常用工具库
  * author:stepday
  * date:2017-12-19
  * description: 很多代码片段直接来自于网络，经过优化整理形成工具库，很多代码是来自于多年来项目中积累的知识，希望分享给更多的朋友，介绍百度搜索的时间
@@ -24,7 +24,7 @@ Common.Tools = {
             var expiresDate = new Date();
             //设置生存期，一天后过期
             expiresDate.setDate(expiresDate.getDate() + (_day ? _day : 1));
-            document.cookie = _key + "=" + _val + ";expires= " + expiresDate.toGMTString() + ";path=/;"; //标记已经访问了站点
+            document.cookie = _key + "=" + encodeURIComponent(_val) + ";expires= " + expiresDate.toGMTString() + ";path=/;"; //标记已经访问了站点
         },
         /**
          * 获取cookies
@@ -43,7 +43,7 @@ Common.Tools = {
                     // set index of end of cookie value
                     if (end == -1)
                         end = document.cookie.length;
-                    returnvalue = unescape(document.cookie.substring(offset, end));
+                    returnvalue = decodeURIComponent(document.cookie.substring(offset, end));
                 }
             }
             return returnvalue;
@@ -61,7 +61,23 @@ Common.Tools = {
         }
     },
     String: {
-    	
+    	/**
+        * 获取字符串的字节长度
+        * 一个中文两个字节，其他一个字节 需要通过 charCodeAt()来转换为Unicode 中文的Unicode 是大于255的
+        * @param _str:string 字符串
+        */
+        getBytesLen:function(_str){
+            if(!_str) return 0;
+            var _len = _str.length,
+                _byteLen = _len;
+            for(var i = 0;i<_len;i++)
+            {
+                if(_str.charCodeAt(i) > 255)
+                    _byteLen ++;
+            }    
+
+            return _byteLen;
+        }
     },
     Number: {
     	

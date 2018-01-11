@@ -3,7 +3,7 @@
 <head>
 	<title>工具库实操</title>
 	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-	<script type="text/javascript" src="jquery.tools.js"></script>
+	<script type="text/javascript" src="util.js"></script>
 	<style type="text/css">
 		.btn{ height: 35px; line-height: 35px;border-radius: 5px;outline: none;background: #f4511e;color: #fff;text-align: center; font-size: 14px;padding: 0 15px; cursor: pointer; max-width: 300px; display: inline-block; margin-top: 15px;}
 		.btn:hover{
@@ -39,6 +39,10 @@
 	<div class="btn" onclick="alert(Common.Tools.Browser.isSuportPlaceholder());">是否支持placeholder</div>
 	<div class="btn blue" onclick="alert(Common.Tools.Browser.getParam('name'));">获取name参数值</div>	
 	<div class="btn red" onclick="alert(Common.Tools.Browser.isWeixin());">是否为微信浏览器</div>
+
+	<h5>Common.Tools.String</h5>
+	<input type="text" id="txtString" placeholder="请输入字符串">
+	<div class="btn black" onclick="alert(Common.Tools.String.getBytesLen($('#txtString').val()));">获取字节长度</div>
 
 	<script type="text/javascript">
 		checkMobile = function(){
